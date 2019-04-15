@@ -16,13 +16,14 @@ protocol SearchViewDelegate: class {
 class SearchViewModel {
     var result : Movie?
     var delegate: SearchViewDelegate?
+    var pickerData: [String] = ["Movie","Series","Episode"]
     
     let urlString: String = "http://www.omdbapi.com/?s=Batman&page=2&apikey=6dc0afb6"
     
     init() {
-        getMovies()
+        getMovies(name: "Batman", type: "movie", year: "2016")
     }
-    func getMovies(){
+    func getMovies(name: String, type: String?, year: String?){
         setLoading(true)
         
         Alamofire.request( urlString).responseJSON
