@@ -8,6 +8,7 @@ target 'MobvenCase' do
   # Pods for MobvenCase
 
     pod 'Alamofire', '~> 4.7.3'
+    pod 'Kingfisher', '~> 4.10.0'
 
   target 'MobvenCaseTests' do
     inherit! :search_paths

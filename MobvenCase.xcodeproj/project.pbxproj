@@ -114,6 +114,11 @@
 		171920D622648D8F00A3B520 /* MobvenCase */ = {
 			isa = PBXGroup;
 			children = (
+				176808B7226493BD0027DCB6 /* Storyboard */,
+				176808B8226493D70027DCB6 /* Model */,
+				176808B9226493E30027DCB6 /* View */,
+				176808BA226493EF0027DCB6 /* ViewModel */,
+				176808BB226493FD0027DCB6 /* Controller */,
 				171920D722648D8F00A3B520 /* AppDelegate.swift */,
 				171920D922648D8F00A3B520 /* ViewController.swift */,
 				171920DB22648D8F00A3B520 /* Main.storyboard */,
@@ -142,6 +147,41 @@
 			path = MobvenCaseUITests;
 			sourceTree = "<group>";
 		};
+		176808B7226493BD0027DCB6 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		176808B8226493D70027DCB6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		176808B9226493E30027DCB6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		176808BA226493EF0027DCB6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		176808BB226493FD0027DCB6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		1E467C0EA02DD787355F5F9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,7 +202,6 @@
 				2691F1F885C9A7910A04ECA5 /* Pods-MobvenCaseUITests.debug.xcconfig */,
 				DC3EA059EA048BB79375EC8E /* Pods-MobvenCaseUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -351,12 +390,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MobvenCase/Pods-MobvenCase-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
