@@ -17,10 +17,10 @@ struct SearchModel {
 
 extension SearchModel : Decodable {
     enum SearchModelCodingKeys: String, CodingKey {
-        case title
-        case year
-        case type
-        case poster
+        case title = "Title"
+        case year = "Year"
+        case type = "Type"
+        case poster = "Poster"
     }
     
     init(from decoder : Decoder) throws {
