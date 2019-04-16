@@ -23,9 +23,10 @@ class SearchViewController: UIViewController {
     var viewModel = SearchViewModel()
     var yearIsSelected: Bool = false
     var typeIsSelected: Bool = false
-    
     let tickActiveImage: UIImage = UIImage(named: "tickPassive")!
     let tickPassive: UIImage = UIImage(named: "oval15")!
+    
+    var isPagePickerSelected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,14 +45,27 @@ class SearchViewController: UIViewController {
         if (movieNameTextField.text?.isEmpty)! {
             print("Boş bırakmayınız")
         }else {
-            viewModel.getMovies(name: movieNameTextField.text!, type: typeTextField.text, year: yearTextField!.text, page: "2")
+            viewModel.getMovies(name: movieNameTextField.text!, type: typeTextField.text, year: yearTextField!.text, page: pagesTextField.text!)
             tableView.isHidden = false
+            pagesTextField.isHidden = false
         }
     }
     @IBAction func typeTextFieldEditingDidBegin(_ sender: UITextField) {
         typeTextField.resignFirstResponder()
         pickerView.isHidden = false
         doneButtonOutlet.isHidden = false
+        isPagePickerSelected = false
+        
+        pickerView.reloadAllComponents()
+    }
+    
+    @IBAction func pagesTextFieldEditingDidBegin(_ sender: UITextField) {
+        pagesTextField.resignFirstResponder()
+        pickerView.isHidden = false
+        doneButtonOutlet.isHidden = false
+        isPagePickerSelected = true
+        
+        pickerView.reloadAllComponents()
     }
     
     @IBAction func doneButton(_ sender: Any) {
@@ -59,7 +73,6 @@ class SearchViewController: UIViewController {
         doneButtonOutlet.isHidden = true
     }
     @IBAction func yearButton(_ sender: Any) {
-        yearIsSelected = !yearIsSelected
         
         if yearIsSelected {
             yearButtonOutlet.setImage(tickPassive, for: .normal)
@@ -69,11 +82,10 @@ class SearchViewController: UIViewController {
             yearButtonOutlet.setImage(tickActiveImage, for: .normal)
             yearTextField.isEnabled = true
         }
+        yearIsSelected = !yearIsSelected
     }
     
     @IBAction func typeButton(_ sender: Any) {
-        typeIsSelected = !typeIsSelected
-        
         if typeIsSelected {
             typeButtonOutlet.setImage(tickPassive, for: .normal)
             typeTextField.isEnabled = false
@@ -82,6 +94,7 @@ class SearchViewController: UIViewController {
             typeButtonOutlet.setImage(tickActiveImage, for: .normal)
             typeTextField.isEnabled = true
         }
+        typeIsSelected = !typeIsSelected
     }
 }
 
@@ -122,16 +135,29 @@ extension SearchViewController : UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return viewModel.pickerData.count
+        if isPagePickerSelected {
+            return viewModel.pagePickerData.count
+        } else {
+             return viewModel.pickerData.count
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return viewModel.pickerData[row]
+        if isPagePickerSelected {
+            return String(viewModel.pagePickerData[row])
+        } else {
+            return viewModel.pickerData[row]
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let selectedValue = viewModel.pickerData[row]
-        typeTextField.text = selectedValue
+        if isPagePickerSelected {
+            let selectedValue = String(viewModel.pagePickerData[row])
+            pagesTextField.text = selectedValue
+        } else {
+            let selectedValue = viewModel.pickerData[row]
+            typeTextField.text = selectedValue
+        }
     }
     
 }
@@ -140,7 +166,23 @@ extension SearchViewController : SearchViewDelegate {
     func updatedList() {
         tableView.reloadData()
     }
-    
+}
 
+extension SearchViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        typeTextField.resignFirstResponder()
+        yearTextField.resignFirstResponder()
+        pagesTextField.resignFirstResponder()
+        movieNameTextField.resignFirstResponder()
+        pickerView.isHidden = true
+        doneButtonOutlet.isHidden = true
+        
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 

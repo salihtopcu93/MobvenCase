@@ -17,6 +17,8 @@ class SearchViewModel {
     var result : Movie?
     var delegate: SearchViewDelegate?
     var pickerData: [String] = ["Movie","Series","Episode"]
+    var pagePickerData : [Int] = []
+
     
     func getMovies(name: String, type: String?, year: String?, page: String?){
         setLoading(true)
@@ -45,6 +47,13 @@ class SearchViewModel {
                     let result = try JSONDecoder().decode(Movie.self, from: data)
                     
                     self.result = result
+                    
+                    let pageCount = (Int(result.totalResults)!  / 10) + 1
+                    
+                    for page in 1...pageCount {
+                        self.pagePickerData.append(page)
+                    }
+                    
                     self.delegate?.updatedList()
                     
                 } catch let error {
