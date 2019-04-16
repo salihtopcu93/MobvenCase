@@ -23,6 +23,8 @@ class SearchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewModel.delegate = self
     }
     @IBAction func searchButton(_ sender: Any) {
         if (movieNameTextField.text?.isEmpty)! {
@@ -50,16 +52,25 @@ class SearchViewController: UIViewController {
 extension SearchViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //
-        return 10
+        return viewModel.result?.search.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! SearchTableViewCell
+        let imageUrl = viewModel.result?.search[indexPath.row].poster
+        let title = viewModel.result?.search[indexPath.row].title
+        let subTitle = viewModel.result?.search[indexPath.row].type
+        cell.setView(imageUrl: imageUrl ?? "", title: title ?? "", subTitle: subTitle ?? "")
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let detailViewController = storyboard.instantiateViewController(withIdentifier: "detailVC") as! DetailViewController
+        
+        detailViewController.result = viewModel.result?.search[indexPath.row]
+        
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -87,5 +98,13 @@ extension SearchViewController : UIPickerViewDataSource, UIPickerViewDelegate {
         typeTextField.text = selectedValue
     }
     
+}
+
+extension SearchViewController : SearchViewDelegate {
+    func updatedList() {
+        tableView.reloadData()
+    }
+    
+
 }
 

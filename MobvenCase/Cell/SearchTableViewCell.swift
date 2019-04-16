@@ -7,9 +7,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SearchTableViewCell: UITableViewCell {
-
+    
+    @IBOutlet weak var cellImageView: UIImageView!
+    @IBOutlet weak var cellTitleLabel: UILabel!
+    @IBOutlet weak var cellSubTitleLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +25,12 @@ class SearchTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setView(imageUrl: String, title: String, subTitle:String){
+        cellImageView.kf.setImage(with: URL(string: imageUrl))
+        cellTitleLabel.text = title
+        cellSubTitleLabel.text = subTitle
     }
 
 }
