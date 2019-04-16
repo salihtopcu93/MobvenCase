@@ -17,36 +17,72 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var pagesTextField: UITextField!
     @IBOutlet weak var doneButtonOutlet: UIButton!
-    
+    @IBOutlet weak var yearButtonOutlet: UIButton!
+    @IBOutlet weak var typeButtonOutlet: UIButton!
     
     var viewModel = SearchViewModel()
+    var yearIsSelected: Bool = false
+    var typeIsSelected: Bool = false
+    
+    let tickActiveImage: UIImage = UIImage(named: "tickPassive")!
+    let tickPassive: UIImage = UIImage(named: "oval15")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.delegate = self
+        disabled()
+    }
+    
+    func disabled() {
+        yearTextField.isEnabled = false
+        typeTextField.isEnabled = false
+        pagesTextField.isHidden = true
+        tableView.isHidden = true
     }
     @IBAction func searchButton(_ sender: Any) {
         if (movieNameTextField.text?.isEmpty)! {
             print("Boş bırakmayınız")
         }else {
             viewModel.getMovies(name: movieNameTextField.text!, type: typeTextField.text, year: yearTextField!.text, page: "2")
+            tableView.isHidden = false
         }
     }
     @IBAction func typeTextFieldEditingDidBegin(_ sender: UITextField) {
         typeTextField.resignFirstResponder()
         pickerView.isHidden = false
         doneButtonOutlet.isHidden = false
-        
     }
+    
     @IBAction func doneButton(_ sender: Any) {
         pickerView.isHidden = true
         doneButtonOutlet.isHidden = true
     }
+    @IBAction func yearButton(_ sender: Any) {
+        yearIsSelected = !yearIsSelected
+        
+        if yearIsSelected {
+            yearButtonOutlet.setImage(tickPassive, for: .normal)
+            yearTextField.isEnabled = false
+            yearTextField.text = ""
+        } else {
+            yearButtonOutlet.setImage(tickActiveImage, for: .normal)
+            yearTextField.isEnabled = true
+        }
+    }
     
-    
-
-
+    @IBAction func typeButton(_ sender: Any) {
+        typeIsSelected = !typeIsSelected
+        
+        if typeIsSelected {
+            typeButtonOutlet.setImage(tickPassive, for: .normal)
+            typeTextField.isEnabled = false
+            typeTextField.text = ""
+        } else {
+            typeButtonOutlet.setImage(tickActiveImage, for: .normal)
+            typeTextField.isEnabled = true
+        }
+    }
 }
 
 extension SearchViewController : UITableViewDelegate, UITableViewDataSource {

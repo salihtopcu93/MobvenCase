@@ -126,21 +126,29 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaT-l2-f5C">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaT-l2-f5C">
                                 <rect key="frame" x="30" y="134" width="30" height="30"/>
-                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="WAH-jW-D05"/>
                                     <constraint firstAttribute="height" constant="30" id="hRd-4c-9o7"/>
                                 </constraints>
+                                <state key="normal" image="oval15"/>
+                                <connections>
+                                    <action selector="yearButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yoH-H5-SfD"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZ2-EN-m34">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yZ2-EN-m34">
                                 <rect key="frame" x="217" y="134" width="30" height="30"/>
-                                <color key="backgroundColor" red="0.79991227389999997" green="0.80005055670000003" blue="0.79990351199999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="809-GL-5RJ"/>
                                     <constraint firstAttribute="width" constant="30" id="IYG-cQ-5oE"/>
                                 </constraints>
+                                <state key="normal" image="oval15"/>
+                                <connections>
+                                    <action selector="typeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yyz-Ib-s5r"/>
+                                </connections>
                             </button>
                             <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Hr-2I-7zn">
                                 <rect key="frame" x="0.0" y="536" width="414" height="200"/>
@@ -200,7 +208,9 @@
                         <outlet property="pagesTextField" destination="RFR-c4-L7H" id="nuc-hh-XcM"/>
                         <outlet property="pickerView" destination="5Hr-2I-7zn" id="KvB-Cl-baL"/>
                         <outlet property="tableView" destination="suq-EC-X0K" id="R6h-OX-7F7"/>
+                        <outlet property="typeButtonOutlet" destination="yZ2-EN-m34" id="UUh-Jm-4gj"/>
                         <outlet property="typeTextField" destination="4nk-7m-FKT" id="rDR-6E-oz6"/>
+                        <outlet property="yearButtonOutlet" destination="PaT-l2-f5C" id="xZD-hK-CG2"/>
                         <outlet property="yearTextField" destination="caj-bw-x3J" id="K3i-wC-geC"/>
                     </connections>
                 </viewController>
@@ -297,4 +307,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="132.88043478260872"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="oval15" width="23" height="23"/>
+    </resources>
 </document>
