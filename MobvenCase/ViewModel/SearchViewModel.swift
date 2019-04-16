@@ -22,26 +22,14 @@ class SearchViewModel {
     
     func getMovies(name: String, type: String?, year: String?, page: String?){
         setLoading(true)
-        var parameter = [String:Any]()
-        parameter["s"] = name
-        parameter["apikey"] = "6dc0afb6"
-        
-        if let type = type{
-            parameter["type"] = type
-        }
-        if let year = year {
-            parameter["y"] = year
-        }
-        if let page = page {
-        parameter["page"] = page
-        }
     
-        let baseUrlString: String = "http://www.omdbapi.com/"
-        
-        Alamofire.request(baseUrlString, method: .get, parameters: parameter, encoding: URLEncoding.default, headers: nil).responseJSON
-            { (response) in
-                print(response.request)
-                guard let data = response.data else {return}
+        wsProvider.request(.search(name: name, type: type, page: page, year: year)) { (response) in
+            
+            switch response {
+            case .failure(let err):
+                print(err)
+            case .success(let value):
+                let data = value.data
                 
                 do {
                     let result = try JSONDecoder().decode(Movie.self, from: data)
@@ -60,6 +48,7 @@ class SearchViewModel {
                     print(error)
                 }
                 self.setLoading(false)
+            }
         }
     }
     

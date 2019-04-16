@@ -51,12 +51,17 @@ class SearchViewController: UIViewController {
         }
     }
     @IBAction func typeTextFieldEditingDidBegin(_ sender: UITextField) {
-        typeTextField.resignFirstResponder()
-        pickerView.isHidden = false
-        doneButtonOutlet.isHidden = false
-        isPagePickerSelected = false
-        
-        pickerView.reloadAllComponents()
+        let pv = UIPickerView()
+        pv.dataSource = self
+        pv.delegate = self
+        addToolBar(textField: sender)
+        sender.inputView = pv
+//        typeTextField.resignFirstResponder()
+//        pickerView.isHidden = false
+//        doneButtonOutlet.isHidden = false
+//        isPagePickerSelected = false
+//
+//        pickerView.reloadAllComponents()
     }
     
     @IBAction func pagesTextFieldEditingDidBegin(_ sender: UITextField) {
@@ -178,11 +183,30 @@ extension SearchViewController: UITextFieldDelegate {
         doneButtonOutlet.isHidden = true
         
         return true
+
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
+    
+    func addToolBar(textField: UITextField){
+        var toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1)
+        var doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItem.Style.done, target: self, action: #selector(donePressed))
+        toolBar.setItems([doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        toolBar.sizeToFit()
+        
+        textField.delegate = self
+        textField.inputAccessoryView = toolBar
+    }
+    @objc func donePressed(){
+        view.endEditing(true)
+    }
 }
+
 
