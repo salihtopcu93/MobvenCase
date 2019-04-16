@@ -18,16 +18,27 @@ class SearchViewModel {
     var delegate: SearchViewDelegate?
     var pickerData: [String] = ["Movie","Series","Episode"]
     
-    let urlString: String = "http://www.omdbapi.com/?s=Batman&page=2&apikey=6dc0afb6"
-    
-    init() {
-        getMovies(name: "Batman", type: "movie", year: "2016")
-    }
-    func getMovies(name: String, type: String?, year: String?){
+    func getMovies(name: String, type: String?, year: String?, page: String?){
         setLoading(true)
+        var parameter = [String:Any]()
+        parameter["s"] = name
+        parameter["apikey"] = "6dc0afb6"
         
-        Alamofire.request( urlString).responseJSON
+        if let type = type{
+            parameter["type"] = type
+        }
+        if let year = year {
+            parameter["y"] = year
+        }
+        if let page = page {
+        parameter["page"] = page
+        }
+    
+        let baseUrlString: String = "http://www.omdbapi.com/"
+        
+        Alamofire.request(baseUrlString, method: .get, parameters: parameter, encoding: URLEncoding.default, headers: nil).responseJSON
             { (response) in
+                print(response.request)
                 guard let data = response.data else {return}
                 
                 do {

@@ -28,7 +28,7 @@ class SearchViewController: UIViewController {
         if (movieNameTextField.text?.isEmpty)! {
             print("Boş bırakmayınız")
         }else {
-            viewModel.getMovies(name: movieNameTextField.text!, type: typeTextField.text, year: yearTextField!.text)
+            viewModel.getMovies(name: movieNameTextField.text!, type: typeTextField.text, year: yearTextField!.text, page: "2")
         }
     }
     @IBAction func typeTextFieldEditingDidBegin(_ sender: UITextField) {
