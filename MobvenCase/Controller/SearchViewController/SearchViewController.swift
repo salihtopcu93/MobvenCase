@@ -42,8 +42,12 @@ class SearchViewController: UIViewController {
         tableView.isHidden = true
     }
     @IBAction func searchButton(_ sender: Any) {
-        if (movieNameTextField.text?.isEmpty)! {
+       
+        guard let trimControll = movieNameTextField.text?.trimmingCharacters(in: .whitespaces) else {return}
+        
+        if (trimControll.isEmpty) {
             print("Boş bırakmayınız")
+            showAlert()
         }else {
             viewModel.getMovies(name: movieNameTextField.text!, type: typeTextField.text, year: yearTextField!.text, page: pagesTextField.text!)
             tableView.isHidden = false
@@ -51,26 +55,28 @@ class SearchViewController: UIViewController {
         }
     }
     @IBAction func typeTextFieldEditingDidBegin(_ sender: UITextField) {
+            pickerView(sender: sender, PickerSelected: false)
+    }
+    
+    @IBAction func pagesTextFieldEditingDidBegin(_ sender: UITextField) {
+            pickerView(sender: sender, PickerSelected: true)
+
+    }
+    
+    func pickerView(sender : UITextField, PickerSelected : Bool){
         let pv = UIPickerView()
         pv.dataSource = self
         pv.delegate = self
         addToolBar(textField: sender)
         sender.inputView = pv
-//        typeTextField.resignFirstResponder()
-//        pickerView.isHidden = false
-//        doneButtonOutlet.isHidden = false
-//        isPagePickerSelected = false
-//
-//        pickerView.reloadAllComponents()
+        isPagePickerSelected = PickerSelected
     }
     
-    @IBAction func pagesTextFieldEditingDidBegin(_ sender: UITextField) {
-        pagesTextField.resignFirstResponder()
-        pickerView.isHidden = false
-        doneButtonOutlet.isHidden = false
-        isPagePickerSelected = true
-        
-        pickerView.reloadAllComponents()
+    func showAlert(){
+        let alertController = UIAlertController(title: "Dikkat", message: "Lütfen isim alanını boş bırakmayınız.", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Tamam", style: .cancel, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+
     }
     
     @IBAction func doneButton(_ sender: Any) {
