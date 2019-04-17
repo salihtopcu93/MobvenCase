@@ -9,7 +9,7 @@ target 'MobvenCase' do
 
     pod 'Alamofire', '~> 4.7.3'
     pod 'Kingfisher', '~> 4.10.0'
-    pod 'Moya'
+    pod 'Moya', '~> 11.0.2' 
 
   target 'MobvenCaseTests' do
     inherit! :search_paths

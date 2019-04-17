@@ -128,16 +128,15 @@
 		171920D622648D8F00A3B520 /* MobvenCase */ = {
 			isa = PBXGroup;
 			children = (
-				172DE7892266119400513BAC /* Network */,
-				176808B7226493BD0027DCB6 /* Storyboard */,
+				17D16F432264AB80001B3583 /* Cell */,
+				176808BB226493FD0027DCB6 /* Controller */,
 				176808B8226493D70027DCB6 /* Model */,
+				172DE7892266119400513BAC /* Network */,
+				17477EB72267221700B432A7 /* Resources */,
+				176808B7226493BD0027DCB6 /* Storyboard */,
 				176808B9226493E30027DCB6 /* View */,
 				176808BA226493EF0027DCB6 /* ViewModel */,
-				176808BB226493FD0027DCB6 /* Controller */,
-				17D16F432264AB80001B3583 /* Cell */,
 				171920D722648D8F00A3B520 /* AppDelegate.swift */,
-				171920DE22648D9000A3B520 /* Assets.xcassets */,
-				171920E022648D9000A3B520 /* LaunchScreen.storyboard */,
 				171920E322648D9000A3B520 /* Info.plist */,
 			);
 			path = MobvenCase;
@@ -186,9 +185,18 @@
 			path = DetailViewController;
 			sourceTree = "<group>";
 		};
+		17477EB72267221700B432A7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				171920DE22648D9000A3B520 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		176808B7226493BD0027DCB6 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				171920E022648D9000A3B520 /* LaunchScreen.storyboard */,
 				171920DB22648D8F00A3B520 /* Main.storyboard */,
 			);
 			path = Storyboard;
@@ -677,6 +685,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7LHLQS9ZQQ;
 				INFOPLIST_FILE = MobvenCase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -696,6 +705,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7LHLQS9ZQQ;
 				INFOPLIST_FILE = MobvenCase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
