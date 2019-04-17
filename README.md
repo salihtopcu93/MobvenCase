@@ -12,3 +12,5 @@ I would like to add more information, player list and score information to the I
 To make the project ready, go to the project directory and add 'pod install' to the terminal screen.
 
 The project does not require any special tools to operate.
+
+Supports all versions of iOS 9 and later.
