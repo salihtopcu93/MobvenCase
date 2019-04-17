@@ -1,0 +1,8 @@
+app_identifier("SalihTopcu-MobvenCase.MobvenCase") # The bundle identifier of your app
+apple_id("salihtopcu.1993@gmail.com") # Your Apple email address
+
+itc_team_id("118459929") # App Store Connect Team ID
+team_id("M7RAF8YBV8") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
